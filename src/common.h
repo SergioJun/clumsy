@@ -8,7 +8,7 @@
 #define MSG_BUFSIZE 512
 #define FILTER_BUFSIZE 1024
 #define NAME_SIZE 16
-#define MODULE_CNT 8
+#define MODULE_CNT 9
 #define ICON_UPDATE_MS 200
 
 #define CONTROLS_HANDLE "__CONTROLS_HANDLE"
@@ -139,6 +139,7 @@ typedef struct {
 } Module;
 
 extern Module lagModule;
+extern Module jitterModule;
 extern Module dropModule;
 extern Module throttleModule;
 extern Module oodModule;

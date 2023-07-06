@@ -102,6 +102,7 @@ pub fn build(b: *std.build.Builder) void {
     exe.addCSourceFile("src/duplicate.c", &.{""});
     exe.addCSourceFile("src/elevate.c", &.{""});
     exe.addCSourceFile("src/lag.c", &.{""});
+    exe.addCSourceFile("src/jitter.c", &.{""});
     exe.addCSourceFile("src/main.c", &.{""});
     exe.addCSourceFile("src/ood.c", &.{""});
     exe.addCSourceFile("src/packet.c", &.{""});
@@ -114,18 +115,18 @@ pub fn build(b: *std.build.Builder) void {
     if (arch == .x86)
         exe.addCSourceFile("etc/chkstk.s", &.{""});
 
-    exe.addIncludeDir(b.fmt("external/{s}/include", .{windivert_dir}));
+    exe.addIncludePath(b.fmt("external/{s}/include", .{windivert_dir}));
 
     const iupLib = switch (arch) {
         .x64 => "external/iup-3.30_Win64_mingw6_lib",
         .x86 => "external/iup-3.30_Win32_mingw6_lib",
     };
 
-    exe.addIncludeDir(b.pathJoin(&.{iupLib, "include"}));
+    exe.addIncludePath(b.pathJoin(&.{iupLib, "include"}));
     exe.addCSourceFile(b.pathJoin(&.{iupLib, "libiup.a"}), &.{""});
 
     exe.linkLibC();
-    exe.addLibPath(b.fmt("external/{s}/{s}", .{windivert_dir, arch_tag}));
+    exe.addLibraryPath(b.fmt("external/{s}/{s}", .{windivert_dir, arch_tag}));
     exe.linkSystemLibrary("WinDivert");
     exe.linkSystemLibrary("comctl32");
     exe.linkSystemLibrary("Winmm");
