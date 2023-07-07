@@ -23,6 +23,8 @@ PacketNode* createNode(char* buf, UINT len, WINDIVERT_ADDRESS *addr) {
     newNode->packetLen = len;
     memcpy(&(newNode->addr), addr, sizeof(WINDIVERT_ADDRESS));
     newNode->next = newNode->prev = NULL;
+    newNode->timestamp = 0;
+    newNode->lagDiff = 0;
     return newNode;
 }
 

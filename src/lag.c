@@ -100,7 +100,7 @@ static short lagProcess(PacketNode *head, PacketNode *tail) {
     // try sending overdue packets from buffer tail
     while (!isBufEmpty()) {
         pac = bufTail->prev;
-        if (currentTime > pac->timestamp + lagTime) {
+        if (currentTime >= (pac->timestamp + pac->lagDiff + lagTime)){
             insertAfter(popNode(bufTail->prev), head); // sending queue is already empty by now
             --bufSize;
             LOG("Send lagged packets.");
