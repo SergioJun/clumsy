@@ -259,7 +259,7 @@ static DWORD divertClockLoop(LPVOID arg) {
                 // if didn't spent enough time, we sleep on it
                 stepTick = GetTickCount() - startTick;
                 if (stepTick < CLOCK_WAITMS) {
-                    Sleep(CLOCK_WAITMS - stepTick);
+                    Sleep(1);
                 }
                 break;
             case WAIT_TIMEOUT:
